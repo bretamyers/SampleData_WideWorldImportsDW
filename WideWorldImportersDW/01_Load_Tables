@@ -1,0 +1,162 @@
+
+/*
+------------------------------------------------------------
+------------------------------------------------------------
+Dimensions
+------------------------------------------------------------
+------------------------------------------------------------
+*/
+IF OBJECT_ID('DimCity', 'U') IS NOT NULL
+    DROP TABLE DimCity
+;
+CREATE TABLE DimCity AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Dimension/City/*.parquet'
+    ) AS s
+;
+
+
+IF OBJECT_ID('DimCustomer', 'U') IS NOT NULL
+    DROP TABLE DimCustomer
+;
+CREATE TABLE DimCustomer AS
+    SELECT *
+    FROM OPENROWSET(BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Dimension/Customer/*.parquet'
+    ) AS s
+;
+
+IF OBJECT_ID('DimDate', 'U') IS NOT NULL
+    DROP TABLE DimDate
+;
+CREATE TABLE DimDate AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Dimension/Date/*.parquet'
+    ) AS s
+;
+
+IF OBJECT_ID('DimEmployee', 'U') IS NOT NULL
+    DROP TABLE DimEmployee
+;
+CREATE TABLE DimEmployee AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Dimension/Employee/*.parquet'
+    ) AS s
+;
+
+IF OBJECT_ID('DimPaymentMethod', 'U') IS NOT NULL
+    DROP TABLE DimPaymentMethod
+;
+CREATE TABLE DimPaymentMethod AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Dimension/PaymentMethod/*.parquet'
+    ) AS s
+;
+
+IF OBJECT_ID('DimStockItem', 'U') IS NOT NULL
+    DROP TABLE DimStockItem
+;
+CREATE TABLE DimStockItem AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Dimension/StockItem/*.parquet'
+    ) AS s
+;
+
+IF OBJECT_ID('DimSupplier', 'U') IS NOT NULL
+    DROP TABLE DimSupplier
+;
+CREATE TABLE DimSupplier AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Dimension/Supplier/*.parquet'
+    ) AS s
+;
+
+IF OBJECT_ID('DimTransactionType', 'U') IS NOT NULL
+    DROP TABLE DimTransactionType
+;
+CREATE TABLE DimTransactionType AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Dimension/TransactionType/*.parquet'
+    ) AS s
+;
+
+
+
+/*
+------------------------------------------------------------
+------------------------------------------------------------
+Facts
+------------------------------------------------------------
+------------------------------------------------------------
+*/
+
+IF OBJECT_ID('FactMovement', 'U') IS NOT NULL
+    DROP TABLE FactMovement
+;
+CREATE TABLE FactMovement AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Fact/Movement/*.parquet'
+    ) AS s
+;
+
+IF OBJECT_ID('FactOrder', 'U') IS NOT NULL
+    DROP TABLE FactOrder
+;
+CREATE TABLE FactOrder AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Fact/Order/*.parquet'
+    ) AS s
+;
+
+IF OBJECT_ID('FactPurchase', 'U') IS NOT NULL
+    DROP TABLE FactPurchase
+;
+CREATE TABLE FactPurchase AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Fact/Purchase/*.parquet'
+    ) AS s
+;
+
+
+IF OBJECT_ID('FactSale', 'U') IS NOT NULL
+    DROP TABLE FactSale
+;
+CREATE TABLE FactSale AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Fact/Sale/*.parquet'
+    ) AS s
+;
+
+
+IF OBJECT_ID('FactStockHolding', 'U') IS NOT NULL
+    DROP TABLE FactStockHolding
+;
+CREATE TABLE FactStockHolding AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Fact/StockHolding/*.parquet'
+    ) AS s
+;
+
+
+IF OBJECT_ID('FactTransaction', 'U') IS NOT NULL
+    DROP TABLE FactTransaction
+;
+CREATE TABLE FactTransaction AS
+    SELECT *
+    FROM OPENROWSET(
+    BULK 'https://onelake.dfs.fabric.microsoft.com/{workspace_id}/{lakehouse_id}/Files/WideWorldImportersDW_cleansed/Fact/Transaction/*.parquet'
+    ) AS s
+;
+
+
